@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using FluentAssertions;
 
-namespace Example01.Tests.IntegrationTests;
+namespace Example03.Tests.IntegrationTests;
 
 public class WebApiTests
 {

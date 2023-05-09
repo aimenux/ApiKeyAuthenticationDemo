@@ -8,6 +8,37 @@ namespace Example01.Tests.UnitTests;
 
 public class ApiKeyMiddlewareTests
 {
+    [Theory]
+    [InlineData("xyz")]
+    [InlineData("abc")]
+    public async Task When_ApiKeyHeader_Is_Valid_Then_Should_Returns_Ok(string apiKey)
+    {
+        // arrange
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string>
+            {
+                ["Authentication:ApiKey"] = apiKey
+            })
+            .Build();
+        var context = new DefaultHttpContext
+        {
+            Request = { Headers = { new KeyValuePair<string, StringValues>(ApiKeyConstants.ApiKeyHeaderName, apiKey) }},
+            Response =
+            {
+                Body = new MemoryStream()
+            }
+        };
+
+        Task Next(HttpContext _) => Task.CompletedTask;
+        var middleware = new ApiKeyMiddleware(Next, configuration);
+
+        // act
+        await middleware.InvokeAsync(context);
+
+        // assert
+        context.Response.StatusCode.Should().Be(200);
+    }
+    
     [Fact]
     public async Task When_ApiKeyHeader_Is_Missing_Then_Should_Returns_Unauthorized()
     {
@@ -21,8 +52,8 @@ public class ApiKeyMiddlewareTests
             }
         };
 
-        RequestDelegate next = _ => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(next, configuration);
+        Task Next(HttpContext _) => Task.CompletedTask;
+        var middleware = new ApiKeyMiddleware(Next, configuration);
 
         // act
         await middleware.InvokeAsync(context);
@@ -50,44 +81,13 @@ public class ApiKeyMiddlewareTests
             }
         };
 
-        RequestDelegate next = _ => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(next, configuration);
+        Task Next(HttpContext _) => Task.CompletedTask;
+        var middleware = new ApiKeyMiddleware(Next, configuration);
 
         // act
         await middleware.InvokeAsync(context);
 
         // assert
         context.Response.StatusCode.Should().Be(401);
-    }
-    
-    [Theory]
-    [InlineData("xyz")]
-    [InlineData("abc")]
-    public async Task When_ApiKeyHeader_Is_Valid_Then_Should_Returns_Ok(string apiKey)
-    {
-        // arrange
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["Authentication:ApiKey"] = apiKey
-            })
-            .Build();
-        var context = new DefaultHttpContext
-        {
-            Request = { Headers = { new KeyValuePair<string, StringValues>(ApiKeyConstants.ApiKeyHeaderName, apiKey) }},
-            Response =
-            {
-                Body = new MemoryStream()
-            }
-        };
-
-        RequestDelegate next = _ => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(next, configuration);
-
-        // act
-        await middleware.InvokeAsync(context);
-
-        // assert
-        context.Response.StatusCode.Should().Be(200);
     }
 }

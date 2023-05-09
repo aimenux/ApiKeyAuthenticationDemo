@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\ci.yml = .github\workflows\ci.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example03", "src\Example03\Example03.csproj", "{4C841FBF-28A8-4170-AE26-8D57F5F26C05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example03.Tests", "test\Example03.Tests\Example03.Tests.csproj", "{A30BBBA8-9AE1-4813-BE5F-D959F89D1FAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,14 @@ Global
 		{51DA5659-29AA-42F6-BC98-1D6AF1E70395}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51DA5659-29AA-42F6-BC98-1D6AF1E70395}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51DA5659-29AA-42F6-BC98-1D6AF1E70395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C841FBF-28A8-4170-AE26-8D57F5F26C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C841FBF-28A8-4170-AE26-8D57F5F26C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C841FBF-28A8-4170-AE26-8D57F5F26C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C841FBF-28A8-4170-AE26-8D57F5F26C05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A30BBBA8-9AE1-4813-BE5F-D959F89D1FAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A30BBBA8-9AE1-4813-BE5F-D959F89D1FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A30BBBA8-9AE1-4813-BE5F-D959F89D1FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A30BBBA8-9AE1-4813-BE5F-D959F89D1FAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +60,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0322F7E1-EED3-4572-88A9-DF063A4E7083} = {9339D2D3-8723-4882-804F-248CF0536DEE}
 		{51DA5659-29AA-42F6-BC98-1D6AF1E70395} = {9339D2D3-8723-4882-804F-248CF0536DEE}
+		{A30BBBA8-9AE1-4813-BE5F-D959F89D1FAA} = {9339D2D3-8723-4882-804F-248CF0536DEE}
 	EndGlobalSection
 EndGlobal

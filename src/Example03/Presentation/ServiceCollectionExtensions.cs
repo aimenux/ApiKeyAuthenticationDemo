@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Example01.Presentation;
+namespace Example03.Presentation;
 
 public static class ServiceCollectionExtensions
 {

@@ -26,7 +26,7 @@ public class ApiKeyMiddleware
         if (requestApiKey != actualApiKey)
         {
             context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            await context.Response.WriteAsync("Api key is missing");
+            await context.Response.WriteAsync("Api key is invalid");
             return;
         }
 
