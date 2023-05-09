@@ -1,0 +1,9 @@
+﻿###
+
+GET https://localhost:5000/api/movies/list
+X-Api-Key: xyz
+
+###
+
+GET https://localhost:5000/api/movies/1
+X-Api-Key: xyz
