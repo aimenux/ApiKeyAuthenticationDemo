@@ -21,7 +21,7 @@ app.UseHttpsRedirection();
 
 var appGroup = app
     .MapGroup("/api/movies")
-    .AddEndpointFilter<ApiKeyFilter>()
+    .AddEndpointFilter<ApiKeySecurityFilter>()
     .WithGroupName("Movies");
 
 appGroup

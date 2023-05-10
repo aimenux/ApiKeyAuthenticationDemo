@@ -1,10 +1,10 @@
-﻿namespace Example04.Presentation.Authentication;
+﻿namespace Example06.Presentation.Authentication;
 
-public class ApiKeyFilter : IEndpointFilter
+public class ApiKeySecurityFilter : IEndpointFilter
 {
     private readonly IConfiguration _configuration;
 
-    public ApiKeyFilter(IConfiguration configuration)
+    public ApiKeySecurityFilter(IConfiguration configuration)
     {
         _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
     }

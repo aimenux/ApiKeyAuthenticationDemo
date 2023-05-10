@@ -1,4 +1,4 @@
-﻿using Example03.Presentation.Authentication;
+﻿using Example05.Presentation.Authentication;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 
-namespace Example03.Tests.UnitTests;
+namespace Example05.Tests.UnitTests;
 
-public class ApiKeyFilterTests
+public class ApiKeySecurityFilterTests
 {
     [Theory]
     [InlineData("xyz")]
@@ -35,10 +35,10 @@ public class ApiKeyFilterTests
 
         var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
         var filterContext = new AuthorizationFilterContext(actionContext, new List<IFilterMetadata>());
-        var filter = new ApiKeyFilter(configuration);
+        var securityFilter = new ApiKeySecurityFilter(configuration);
 
         // act
-        filter.OnAuthorization(filterContext);
+        securityFilter.OnAuthorization(filterContext);
 
         // assert
         filterContext.Result.Should().BeNull();
@@ -59,10 +59,10 @@ public class ApiKeyFilterTests
 
         var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
         var filterContext = new AuthorizationFilterContext(actionContext, new List<IFilterMetadata>());
-        var filter = new ApiKeyFilter(configuration);
+        var securityFilter = new ApiKeySecurityFilter(configuration);
 
         // act
-        filter.OnAuthorization(filterContext);
+        securityFilter.OnAuthorization(filterContext);
 
         // assert
         filterContext.Result.Should().NotBeNull();
@@ -90,10 +90,10 @@ public class ApiKeyFilterTests
 
         var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
         var filterContext = new AuthorizationFilterContext(actionContext, new List<IFilterMetadata>());
-        var filter = new ApiKeyFilter(configuration);
+        var securityFilter = new ApiKeySecurityFilter(configuration);
 
         // act
-        filter.OnAuthorization(filterContext);
+        securityFilter.OnAuthorization(filterContext);
 
         // assert
         filterContext.Result.Should().NotBeNull();

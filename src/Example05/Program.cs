@@ -1,10 +1,9 @@
-using Example03.Infrastructure;
-using Example03.Presentation;
-using Example03.Presentation.Authentication;
+using Example05.Infrastructure;
+using Example05.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers(x => x.Filters.Add<ApiKeySecurityFilter>());
+builder.Services.AddControllers();
 builder.Services.AddInfrastructure();
 builder.Services.AddSwagger();
 

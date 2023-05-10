@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Example03.Presentation.Authentication;
 
-public class ApiKeyFilter : IAuthorizationFilter
+public class ApiKeySecurityFilter : IAuthorizationFilter
 {
     private readonly IConfiguration _configuration;
 
-    public ApiKeyFilter(IConfiguration configuration)
+    public ApiKeySecurityFilter(IConfiguration configuration)
     {
         _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
     }

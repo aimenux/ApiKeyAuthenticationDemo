@@ -1,13 +1,13 @@
-﻿using Example04.Presentation.Authentication;
+﻿using Example06.Presentation.Authentication;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 
-namespace Example04.Tests.UnitTests;
+namespace Example06.Tests.UnitTests;
 
-public class ApiKeyFilterTests
+public class ApiKeySecurityFilterTests
 {
     [Theory]
     [InlineData("xyz")]
@@ -31,10 +31,10 @@ public class ApiKeyFilterTests
         };
 
         var filterContext = new FilterContext(context);
-        var filter = new ApiKeyFilter(configuration);
+        var securityFilter = new ApiKeySecurityFilter(configuration);
 
         // act
-        var result = await filter.InvokeAsync(filterContext, _ => new ValueTask<object>(Results.Ok()));
+        var result = await securityFilter.InvokeAsync(filterContext, _ => new ValueTask<object>(Results.Ok()));
 
         // assert
         result.Should().BeOfType<Ok>();
@@ -54,10 +54,10 @@ public class ApiKeyFilterTests
         };
 
         var filterContext = new FilterContext(context);
-        var filter = new ApiKeyFilter(configuration);
+        var securityFilter = new ApiKeySecurityFilter(configuration);
 
         // act
-        var result = await filter.InvokeAsync(filterContext, _ => new ValueTask<object>());
+        var result = await securityFilter.InvokeAsync(filterContext, _ => new ValueTask<object>());
 
         // assert
         result.Should().BeOfType<HttpResults.UnauthorizedHttpResultWithResponseBody>();
@@ -83,10 +83,10 @@ public class ApiKeyFilterTests
         };
 
         var filterContext = new FilterContext(context);
-        var filter = new ApiKeyFilter(configuration);
+        var securityFilter = new ApiKeySecurityFilter(configuration);
 
         // act
-        var result = await filter.InvokeAsync(filterContext, _ => new ValueTask<object>());
+        var result = await securityFilter.InvokeAsync(filterContext, _ => new ValueTask<object>());
 
         // assert
         result.Should().BeOfType<HttpResults.UnauthorizedHttpResultWithResponseBody>();
