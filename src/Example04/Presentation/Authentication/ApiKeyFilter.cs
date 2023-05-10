@@ -13,13 +13,13 @@ public class ApiKeyFilter : IEndpointFilter
     {
         if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyConstants.ApiKeyHeaderName, out var requestApiKey))
         {
-            return Results.Unauthorized();
+            return HttpResults.Unauthorized("Api key is missing");
         }
 
         var actualApiKey = _configuration.GetValue<string>(ApiKeyConstants.ApiKeySectionName);
         if (requestApiKey != actualApiKey)
         {
-            return Results.Unauthorized();
+            return HttpResults.Unauthorized("Api key is invalid");
         }
 
         return await next(context);
