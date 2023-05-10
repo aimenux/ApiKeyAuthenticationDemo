@@ -19,14 +19,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app
-    .MapGet("/api/movies/list", (IMoviesEndpoints endpoints, CancellationToken cancellationToken) => endpoints.GetMoviesAsync(cancellationToken))
+var appGroup = app
+    .MapGroup("/api/movies")
     .AddEndpointFilter<ApiKeyFilter>()
+    .WithGroupName("Movies");
+
+appGroup
+    .MapGet("list", (IMoviesEndpoints endpoints, CancellationToken cancellationToken) => endpoints.GetMoviesAsync(cancellationToken))
     .WithName("GetMovies");
 
-app
-    .MapGet("/api/movies/{movieId:int}", (IMoviesEndpoints endpoints, int movieId, CancellationToken cancellationToken) => endpoints.GetMovieByIdAsync(movieId, cancellationToken))
-    .AddEndpointFilter<ApiKeyFilter>()
+appGroup
+    .MapGet("{movieId:int}", (IMoviesEndpoints endpoints, int movieId, CancellationToken cancellationToken) => endpoints.GetMovieByIdAsync(movieId, cancellationToken))
     .WithName("GetMovieById");
 
 app.Run();

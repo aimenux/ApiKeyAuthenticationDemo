@@ -4,7 +4,7 @@ public static class HttpResults
 {
     public static IResult Unauthorized(string message) => new UnauthorizedHttpResultWithResponseBody(message);
 
-    private class UnauthorizedHttpResultWithResponseBody : IResult, IStatusCodeHttpResult
+    internal class UnauthorizedHttpResultWithResponseBody : IResult, IStatusCodeHttpResult
     {
         private readonly string _responseBody;
     
