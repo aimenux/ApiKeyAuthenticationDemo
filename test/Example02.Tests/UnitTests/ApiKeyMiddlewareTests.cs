@@ -29,8 +29,8 @@ public class ApiKeyMiddlewareTests
             }
         };
 
-        RequestDelegate next = _ => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(next, configuration);
+        Task Next(HttpContext _) => Task.CompletedTask;
+        var middleware = new ApiKeyMiddleware(Next, configuration);
 
         // act
         await middleware.InvokeAsync(context);
@@ -52,8 +52,8 @@ public class ApiKeyMiddlewareTests
             }
         };
 
-        RequestDelegate next = _ => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(next, configuration);
+        Task Next(HttpContext _) => Task.CompletedTask;
+        var middleware = new ApiKeyMiddleware(Next, configuration);
 
         // act
         await middleware.InvokeAsync(context);
@@ -81,8 +81,8 @@ public class ApiKeyMiddlewareTests
             }
         };
 
-        RequestDelegate next = _ => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(next, configuration);
+        Task Next(HttpContext _) => Task.CompletedTask;
+        var middleware = new ApiKeyMiddleware(Next, configuration);
 
         // act
         await middleware.InvokeAsync(context);

@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
-using static Example02.Presentation.Authentication.ApiKeyConstants;
+using static Example04.Presentation.Authentication.ApiKeyConstants;
 
-namespace Example02.Tests.IntegrationTests;
+namespace Example04.Tests.IntegrationTests;
 
 internal class WebApiTestsFixture : WebApplicationFactory<Program>
 {
