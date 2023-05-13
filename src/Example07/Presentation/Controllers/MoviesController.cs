@@ -1,10 +1,8 @@
 using Example07.Infrastructure.Repositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Example07.Presentation.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class MoviesController : ControllerBase

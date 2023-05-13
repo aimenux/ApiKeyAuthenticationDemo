@@ -8,11 +8,8 @@ builder.Services.AddControllers();
 builder.Services.AddInfrastructure();
 builder.Services.AddSwagger();
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = ApiKeyConstants.ApiKeyScheme;
-    options.DefaultChallengeScheme = ApiKeyConstants.ApiKeyScheme;
-}).AddApiKeyAuthentication();
+builder.Services.AddApiKeyAuthentication();
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -27,6 +24,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app
+    .MapControllers()
+    .RequireAuthorization();
 
 app.Run();

@@ -19,5 +19,8 @@ In this repo, i m using various ways to support api key authentication in web ap
 >
 > :six: `Example06` use minimal api with api key authentication based on endpoint filters (applied by route)
 >
-
+> :seven: `Example07` use controller api with api key authentication based on a custom authentication scheme
+>
+> :eight: `Example08` use minimal api with api key authentication based on a custom authentication scheme
+> 
 **`Tools`** : net 7.0, web api, integration-testing, fluent-assertions, nsubstitute, xunit
