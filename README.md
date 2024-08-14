@@ -23,4 +23,4 @@ In this repo, i m using various ways to support api key authentication in web ap
 >
 > :eight: `Example08` use minimal api with api key authentication based on a custom authentication scheme
 > 
-**`Tools`** : net 7.0, web api, integration-testing, fluent-assertions, nsubstitute, xunit
+**`Tools`** : net 8.0, web api, integration-testing, fluent-assertions, nsubstitute, xunit
