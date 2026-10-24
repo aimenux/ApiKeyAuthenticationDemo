@@ -1,7 +1,7 @@
 using Example06.Domain;
 using Example06.Infrastructure.Repositories;
 using Example06.Presentation.Endpoints;
-using FluentAssertions;
+using AwesomeAssertions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
@@ -32,10 +32,10 @@ public class MoviesEndpointsTests
         var result = await endpoints.GetMoviesAsync(CancellationToken.None);
 
         // assert
-        result.Should().BeOfType<Ok<IEnumerable<Movie>>>();
+        result.Should().BeOfType<Ok<IReadOnlyCollection<Movie>>>();
         result
-            .As<Ok<IEnumerable<Movie>>>().Value
-            .As<IEnumerable<Movie>>()
+            .As<Ok<IReadOnlyCollection<Movie>>>().Value
+            .As<IReadOnlyCollection<Movie>>()
             .Should().NotBeNullOrEmpty();
     }
     

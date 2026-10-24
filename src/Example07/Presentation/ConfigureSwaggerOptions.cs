@@ -1,6 +1,6 @@
 ﻿using Example07.Presentation.Authentication;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Example07.Presentation;
@@ -18,20 +18,9 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
             In = ParameterLocation.Header
         });
 
-        options.AddSecurityRequirement(new OpenApiSecurityRequirement
+        options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
         {
-            {
-                new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference
-                    {
-                        Id = ApiKeyConstants.ApiKeyId,
-                        Type = ReferenceType.SecurityScheme
-                    },
-                    In = ParameterLocation.Header
-                },
-                new List<string>()
-            }
+            [new OpenApiSecuritySchemeReference(ApiKeyConstants.ApiKeyId, document)] = []
         });
     }
 }

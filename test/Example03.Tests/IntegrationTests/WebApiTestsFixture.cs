@@ -10,11 +10,12 @@ internal class WebApiTestsFixture : WebApplicationFactory<Program>
 {
     private readonly string _apiKeyHeaderValue;
     
-    private const string ApiKey = "ApiKey4Tests";
+    private const string DefaultApiKeyValue = "ApiKey4Tests";
     
-    public WebApiTestsFixture(string apiKeyHeaderValue = ApiKey)
+    public WebApiTestsFixture(string apiKeyHeaderValue = DefaultApiKeyValue)
     {
         _apiKeyHeaderValue = apiKeyHeaderValue;
+        ClientOptions.BaseAddress = new Uri("https://localhost:5000");
     }
     
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -23,7 +24,8 @@ internal class WebApiTestsFixture : WebApplicationFactory<Program>
         {
             configBuilder.AddInMemoryCollection(new Dictionary<string, string>
             {
-                ["Authentication:ApiKey"] = ApiKey
+                ["Authentication:ApiKey"] = DefaultApiKeyValue,
+                ["Https:Port"] = "5000"
             });
         });
 

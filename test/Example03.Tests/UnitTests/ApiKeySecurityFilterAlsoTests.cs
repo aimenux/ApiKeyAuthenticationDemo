@@ -1,5 +1,6 @@
 ﻿using Example03.Presentation.Authentication;
-using FluentAssertions;
+using AwesomeAssertions;
+using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -18,12 +19,7 @@ public class ApiKeySecurityFilterAlsoTests
     public async Task When_ApiKeyHeader_Is_Valid_Then_Should_Returns_Ok(string apiKey)
     {
         // arrange
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["Authentication:ApiKey"] = apiKey
-            })
-            .Build();
+        var options = Options.Create(new ApiKeyOptions { ApiKey = apiKey });
         var context = new DefaultHttpContext
         {
             Request = { Headers = { new KeyValuePair<string, StringValues>(ApiKeyConstants.ApiKeyHeaderName, apiKey) }},
@@ -36,7 +32,7 @@ public class ApiKeySecurityFilterAlsoTests
         var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
         var executingContext = new ActionExecutingContext(actionContext, new List<IFilterMetadata>(), new Dictionary<string, object>(), "controller");
         var executedContext = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), "controller");
-        var securityFilter = new ApiKeySecurityFilterAlso(configuration);
+        var securityFilter = new ApiKeySecurityFilterAlso(options);
 
         // act
         await securityFilter.OnActionExecutionAsync(executingContext, () => Task.FromResult(executedContext));
@@ -49,7 +45,7 @@ public class ApiKeySecurityFilterAlsoTests
     public async Task When_ApiKeyHeader_Is_Missing_Then_Should_Returns_Unauthorized()
     {
         // arrange
-        var configuration = new ConfigurationBuilder().Build();
+        var options = Options.Create(new ApiKeyOptions());
         var context = new DefaultHttpContext
         {
             Response =
@@ -61,7 +57,7 @@ public class ApiKeySecurityFilterAlsoTests
         var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
         var executingContext = new ActionExecutingContext(actionContext, new List<IFilterMetadata>(), new Dictionary<string, object>(), "controller");
         var executedContext = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), "controller");
-        var securityFilter = new ApiKeySecurityFilterAlso(configuration);
+        var securityFilter = new ApiKeySecurityFilterAlso(options);
 
         // act
         await securityFilter.OnActionExecutionAsync(executingContext, () => Task.FromResult(executedContext));
@@ -74,12 +70,7 @@ public class ApiKeySecurityFilterAlsoTests
     public async Task When_ApiKeyHeader_Is_Invalid_Then_Should_Returns_Unauthorized()
     {
         // arrange
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["Authentication:ApiKey"] = "xyz"
-            })
-            .Build();
+        var options = Options.Create(new ApiKeyOptions { ApiKey = "xyz" });
         var context = new DefaultHttpContext
         {
             Request = { Headers = { new KeyValuePair<string, StringValues>(ApiKeyConstants.ApiKeyHeaderName, "123") }},
@@ -92,7 +83,7 @@ public class ApiKeySecurityFilterAlsoTests
         var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
         var executingContext = new ActionExecutingContext(actionContext, new List<IFilterMetadata>(), new Dictionary<string, object>(), "controller");
         var executedContext = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), "controller");
-        var securityFilter = new ApiKeySecurityFilterAlso(configuration);
+        var securityFilter = new ApiKeySecurityFilterAlso(options);
 
         // act
         await securityFilter.OnActionExecutionAsync(executingContext, () => Task.FromResult(executedContext));

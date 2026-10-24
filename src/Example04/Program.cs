@@ -1,21 +1,22 @@
+using Example04;
 using Example04.Infrastructure;
 using Example04.Presentation;
 using Example04.Presentation.Authentication;
 using Example04.Presentation.Endpoints;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddEndpoints();
-builder.Services.AddInfrastructure();
-builder.Services.AddSwagger();
-
-var app = builder.Build();
+var app = WebApplication.CreateBuilder(args)
+    .WithHttpsCheck()
+    .AddPresentation()
+    .AddInfrastructure()
+    .Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHsts();
 
 app.UseHttpsRedirection();
 

@@ -1,5 +1,6 @@
 ﻿using Example01.Presentation.Authentication;
-using FluentAssertions;
+using AwesomeAssertions;
+using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
@@ -14,12 +15,7 @@ public class ApiKeyMiddlewareTests
     public async Task When_ApiKeyHeader_Is_Valid_Then_Should_Returns_Ok(string apiKey)
     {
         // arrange
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["Authentication:ApiKey"] = apiKey
-            })
-            .Build();
+        var options = Options.Create(new ApiKeyOptions { ApiKey = apiKey });
         var context = new DefaultHttpContext
         {
             Request = { Headers = { new KeyValuePair<string, StringValues>(ApiKeyConstants.ApiKeyHeaderName, apiKey) }},
@@ -30,7 +26,7 @@ public class ApiKeyMiddlewareTests
         };
 
         Task Next(HttpContext _) => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(Next, configuration);
+        var middleware = new ApiKeyMiddleware(Next, options);
 
         // act
         await middleware.InvokeAsync(context);
@@ -43,7 +39,7 @@ public class ApiKeyMiddlewareTests
     public async Task When_ApiKeyHeader_Is_Missing_Then_Should_Returns_Unauthorized()
     {
         // arrange
-        var configuration = new ConfigurationBuilder().Build();
+        var options = Options.Create(new ApiKeyOptions());
         var context = new DefaultHttpContext
         {
             Response =
@@ -53,7 +49,7 @@ public class ApiKeyMiddlewareTests
         };
 
         Task Next(HttpContext _) => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(Next, configuration);
+        var middleware = new ApiKeyMiddleware(Next, options);
 
         // act
         await middleware.InvokeAsync(context);
@@ -66,12 +62,7 @@ public class ApiKeyMiddlewareTests
     public async Task When_ApiKeyHeader_Is_Invalid_Then_Should_Returns_Unauthorized()
     {
         // arrange
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["Authentication:ApiKey"] = "xyz"
-            })
-            .Build();
+        var options = Options.Create(new ApiKeyOptions { ApiKey = "xyz" });
         var context = new DefaultHttpContext
         {
             Request = { Headers = { new KeyValuePair<string, StringValues>(ApiKeyConstants.ApiKeyHeaderName, "123") }},
@@ -82,7 +73,7 @@ public class ApiKeyMiddlewareTests
         };
 
         Task Next(HttpContext _) => Task.CompletedTask;
-        var middleware = new ApiKeyMiddleware(Next, configuration);
+        var middleware = new ApiKeyMiddleware(Next, options);
 
         // act
         await middleware.InvokeAsync(context);

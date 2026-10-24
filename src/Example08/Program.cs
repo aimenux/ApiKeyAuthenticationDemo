@@ -1,24 +1,21 @@
+using Example08;
 using Example08.Infrastructure;
 using Example08.Presentation;
-using Example08.Presentation.Authentication;
 using Example08.Presentation.Endpoints;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddEndpoints();
-builder.Services.AddInfrastructure();
-builder.Services.AddSwagger();
-
-builder.Services.AddApiKeyAuthentication();
-builder.Services.AddAuthorization();
-
-var app = builder.Build();
+var app = WebApplication.CreateBuilder(args)
+    .WithHttpsCheck()
+    .AddPresentation()
+    .AddInfrastructure()
+    .Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHsts();
 
 app.UseHttpsRedirection();
 

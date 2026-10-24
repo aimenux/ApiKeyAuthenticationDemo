@@ -5,16 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace Example05.Presentation.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/movies")]
 public class MoviesController : ControllerBase
 {
     private readonly IMovieRepository _repository;
-    private readonly ILogger<MoviesController> _logger;
 
-    public MoviesController(IMovieRepository repository, ILogger<MoviesController> logger)
+    public MoviesController(IMovieRepository repository)
     {
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     [ServiceFilter(typeof(ApiKeySecurityFilter))]

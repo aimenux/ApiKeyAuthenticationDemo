@@ -4,8 +4,8 @@ namespace Example01.Infrastructure.Repositories;
 
 public class MovieRepository : IMovieRepository
 {
-    private static readonly List<Movie> Movies = new List<Movie>
-    {
+    private static readonly List<Movie> Movies =
+    [
         new Movie
         {
             Id = 1,
@@ -16,11 +16,11 @@ public class MovieRepository : IMovieRepository
             Id = 2,
             Title = "Fearless"
         }
-    };
+    ];
 
-    public Task<IEnumerable<Movie>> GetMoviesAsync(CancellationToken cancellationToken)
+    public Task<IReadOnlyCollection<Movie>> GetMoviesAsync(CancellationToken cancellationToken)
     {
-        return Task.FromResult<IEnumerable<Movie>>(Movies);
+        return Task.FromResult<IReadOnlyCollection<Movie>>(Movies.AsReadOnly());
     }
 
     public Task<Movie> GetMovieByIdAsync(int movieId, CancellationToken cancellationToken)

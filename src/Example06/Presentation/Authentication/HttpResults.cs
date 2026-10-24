@@ -20,6 +20,7 @@ public static class HttpResults
         public async Task ExecuteAsync(HttpContext httpContext)
         {
             ArgumentNullException.ThrowIfNull(httpContext, nameof(httpContext));
+            httpContext.Response.Headers.WWWAuthenticate = ApiKeyConstants.ApiKeyChallenge;
             httpContext.Response.StatusCode = UnauthorizedStatusCode;
             if (!string.IsNullOrWhiteSpace(_responseBody))
             {
