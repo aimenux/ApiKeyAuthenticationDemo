@@ -1,4 +1,4 @@
-[![.NET](https://github.com/aimenux/ApiKeyAuthenticationDemo/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aimenux/ApiKeyAuthenticationDemo/actions/workflows/ci.yml)
+[![.NET](https://github.com/aimenux/ApiKeyAuthenticationDemo/actions/workflows/ci.yml/badge.svg)](https://github.com/aimenux/ApiKeyAuthenticationDemo/actions/workflows/ci.yml)
 
 # 🔑 ApiKeyAuthenticationDemo
 
@@ -178,17 +178,18 @@ If you must keep API keys, at least:
 ```text
 ApiKeyAuthenticationDemo/
 ├── 📁 src/
-│   ├── 📁 Example01/          # Controllers + middleware
-│   ├── 📁 Example02/          # Minimal API + middleware
-│   ├── 📁 Example03/          # Controllers + global authorization filter
-│   ├── 📁 Example04/          # Minimal API + route group endpoint filter
-│   ├── 📁 Example05/          # Controllers + per-action authorization filter
-│   ├── 📁 Example06/          # Minimal API + per-route endpoint filter
-│   ├── 📁 Example07/          # Controllers + custom authentication scheme
-│   └── 📁 Example08/          # Minimal API + custom authentication scheme
-├── 📁 test/                   # One xUnit project per example
-├── 📄 Directory.Packages.props # Central package versions
-└── 📄 global.json             # Pinned .NET SDK
+│   ├── 📁 Example01/                   # Controllers + middleware
+│   ├── 📁 Example02/                   # Minimal API + middleware
+│   ├── 📁 Example03/                   # Controllers + global authorization filter
+│   ├── 📁 Example04/                   # Minimal API + route group endpoint filter
+│   ├── 📁 Example05/                   # Controllers + per-action authorization filter
+│   ├── 📁 Example06/                   # Minimal API + per-route endpoint filter
+│   ├── 📁 Example07/                   # Controllers + custom authentication scheme
+│   └── 📁 Example08/                   # Minimal API + custom authentication scheme
+├── 📁 test/                            # One xUnit project per example
+├── 📄 Directory.Build.props            # Shared build settings
+├── 📄 Directory.Packages.props         # Central package versions
+└── 📄 global.json                      # Pinned .NET SDK
 ```
 
 ## 🛠️ Tools
