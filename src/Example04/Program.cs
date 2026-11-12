@@ -22,8 +22,7 @@ app.UseHttpsRedirection();
 
 var appGroup = app
     .MapGroup("/api/movies")
-    .AddEndpointFilter<ApiKeySecurityFilter>()
-    .WithGroupName("Movies");
+    .AddEndpointFilter<ApiKeySecurityFilter>();
 
 appGroup
     .MapGet("list", (IMoviesEndpoints endpoints, CancellationToken cancellationToken) => endpoints.GetMoviesAsync(cancellationToken))
