@@ -396,4 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/.idea/.idea.ApiKeyAuthenticationDemo/.idea
+.idea
+
+# Others
+.serena

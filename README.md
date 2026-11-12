@@ -196,7 +196,7 @@ ApiKeyAuthenticationDemo/
 
 | Tool | Purpose |
 |------|---------|
-| 🟣 **.NET 10 / ASP.NET Core** | Web API, Kestrel, authentication and authorization |
+| 🟣 **.NET 11 / ASP.NET Core** | Web API, Kestrel, authentication and authorization |
 | 📘 **Swagger / Swashbuckle** | Interactive API docs (Development only) |
 | 🧪 **xUnit** | Test framework |
 | ✨ **AwesomeAssertions** | Readable assertions |
